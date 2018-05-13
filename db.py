@@ -8,7 +8,8 @@ class DataBase:
 
     def set(self, name, value):
         """
-        Set the variable name to the value value. Neither variable names nor values will contain spaces.
+        Set the variable name to the value value. 
+        Neither variable names nor values will contain spaces.
         """
         if self.transaction_cnt == 0:
             self.disk[name] = value
@@ -21,7 +22,8 @@ class DataBase:
 
     def get(self, name):
         """
-        Print out the value of the variable name, or   if that variable is not set.
+        Print out the value of the variable name, or NULL 
+        if that variable is not set.
         """
         if name in self.dirty:
             return self.dirty[name]
@@ -42,7 +44,8 @@ class DataBase:
 
     def numWithValue(self, value):
         """
-        Print out the number of variables that are currently set to value. If no variables equal that value, print 0.
+        Print out the number of variables that are currently set to value. 
+        If no variables equal that value, print 0.
         """
         count = 0
         for name in self.dirty:
@@ -55,14 +58,20 @@ class DataBase:
 
     def begin(self):
         """
-        Open a new transaction block. Transaction blocks can be nested (BEGIN can be issued inside of an existing block) but you should get non‐nested transaction working first before starting on nested. A GET within a transaction returns the latest value by any command. Any data command that is run outside of a transaction block should commit immediately. 
+        Open a new transaction block. Transaction blocks can be nested (BEGIN can
+        be issued inside of an existing block) but you should get non‐nested 
+        transaction working first before starting on nested. A GET within a 
+        transaction returns the latest value by any command. Any data command that 
+        is run outside of a transaction block should commit immediately. 
         """
         self.log.append("BEGIN")
         self.transaction_cnt += 1
 
     def rollback(self):
         """
-        Undo all of the commands issued in the most recent transaction block, and close the block. Print nothing if successful, or print NO TRANSACTION if no transaction is in progress. 
+        Undo all of the commands issued in the most recent transaction block, 
+        and close the block. Print nothing if successful, 
+        or print NO TRANSACTION if no transaction is in progress. 
         """
         if self.transaction_cnt == 0:
             return "NO TRANSACTION"
@@ -77,7 +86,9 @@ class DataBase:
 
     def commit(self):
         """
-        Close all open transaction blocks, permanently applying the changes made in them. Print nothing if successful, or print NO TRANSACTION if no transaction is in progress. 
+        Close all open transaction blocks, permanently applying the changes made 
+        in them. Print nothing if successful, or print NO TRANSACTION if no 
+        transaction is in progress. 
         """
         if self.transaction_cnt == 0:
             return "NO TRANSACTION"
@@ -93,7 +104,8 @@ class DataBase:
 
     def end(self):
         """
-        Exit the program. Your program will always receive this as its last command.
+        Exit the program. Your program will always receive this as its 
+        last command.
         """
         pass
 
